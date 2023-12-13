@@ -1,5 +1,5 @@
 import { addAnimItem, playAnimation } from "../sortingAnimations";
-
+import { swap } from ".";
 
 const bubbleSort = (inputArray = [], enableVisualization = true) => {
     let arr = inputArray;
@@ -17,10 +17,10 @@ const bubbleSort = (inputArray = [], enableVisualization = true) => {
                 // For Animating bar visualizations
                 addAnimItem(animList, j, arr[j], j + 1, arr[j + 1], "found", enableVisualization)
 
+                // swap(arr, j, j + 1)
                 const temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
-
                 // For Animating bar visualizations
                 addAnimItem(animList, j, arr[j], j + 1, arr[j + 1], "swap", enableVisualization)
             }
