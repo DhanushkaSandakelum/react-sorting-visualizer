@@ -1,85 +1,31 @@
+// Hooks / Node modules / Styles
+import React from "react";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
 
+// Reducers / Actions
+
+// Utils
+import { getArrayWithRandomNumbers } from "../../utils/arrays";
+import { bubbleSort, testSortingAlgorithm } from "../../utils/sorting-algorithms";
+
+// Components
 import Button from "../base/button/Button";
 
-import {
-  getRandomInt,
-  getArrayWithRandomNumbers,
-  areArrayEqual,
-} from "../../utils/arrays";
-import { getMergeSortAnimations } from "../../utils/sorting-algorithms/mergeSort";
+// Sub-Components
 
-const REQUIRED_ARRAY_ITEM_AMOUNT = 10;
+// Data / Images / Icons
+import { CONFIG } from "../../data/config";
 
-function SortingVisualizer({
-  visualizerWidth = "1000",
-  visualizerHeight = "600",
-}) {
+function SortingVisualizer({ visualizerWidth = "1000", visualizerHeight = "600" }) {
+  const { REQUIRED_ARRAY_ITEM_AMOUNT } = CONFIG;
+
   const [array, setArray] = useState([]);
 
   const resetArray = () => {
-    const array = getArrayWithRandomNumbers(
-      REQUIRED_ARRAY_ITEM_AMOUNT,
-      5,
-      1000
-    );
+    const array = getArrayWithRandomNumbers(REQUIRED_ARRAY_ITEM_AMOUNT, 5, visualizerHeight);
 
     setArray(array);
-  };
-
-  const mergeSort = () => {
-    const animations = getMergeSortAnimations(array);
-
-    // for (let i = 0; i < animations.length; i++) {
-    //   const element = array[i];
-
-    // }
-
-    console.log(animations);
-  };
-
-  const bubbleSort = (inputArray = []) => {
-    let arr = inputArray;
-    const n = inputArray.length;
-
-    let animList = [{bar1: {idx: 0, val: 0}, bar2: {idx: 1, val: 1}, effect: ""}]
-
-    for (let i = 0; i < n - 1; i++) {
-      for (let j = 0; j < n - i + 1; j++) {
-        if (arr[j] > arr[j + 1]) {
-          const temp = arr[j];
-          arr[j] = arr[j + 1];
-          arr[j + 1] = temp;
-        }
-      }
-    }
-
-    return arr;
-  };
-
-  const testSortingAlgorithm = () => {
-    let res = { success: true, testArray: [], sortedArray: [] };
-
-    for (let i = 0; i < 10; i++) {
-      const length = getRandomInt(2, 100);
-
-      const arr = getArrayWithRandomNumbers(length, 1, 100);
-
-      const jsSortedArray = arr.slice().sort((a, b) => a - b);
-      const sortedArray = bubbleSort(arr.slice());
-
-      if (!areArrayEqual(jsSortedArray, sortedArray)) {
-        res = { success: false, testArray: arr, sortedArray: sortedArray };
-        return false;
-      }
-    }
-
-    if (res.success) {
-        console.log("sorting algorithm works!");
-    } else {
-        console.log("issue found", res);
-    }
   };
 
   useEffect(() => {
@@ -97,7 +43,8 @@ function SortingVisualizer({
         {array.map((val, index) => (
           <div
             key={index}
-            className={classNames("bg-gray-400", {
+            className={classNames({
+              [`array-bar bg-[#b0bec5]`]: true,
               "ml-1": index !== 0,
             })}
             style={{
@@ -113,11 +60,8 @@ function SortingVisualizer({
       {/* Options */}
       <div className="flex flex-row gap-2">
         <Button text="Generate Random Array" onClick={resetArray} />
-        <Button text="Merge Sort" onClick={mergeSort} />
-        <Button
-          text="Test Sorting Alogirithms"
-          onClick={testSortingAlgorithm}
-        />
+        <Button text="Bubble Sort" onClick={() => bubbleSort(array)} />
+        <Button text="Test Sorting Alogirithms" onClick={testSortingAlgorithm} />
       </div>
     </div>
   );
