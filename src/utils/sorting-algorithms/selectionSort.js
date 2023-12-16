@@ -1,7 +1,7 @@
 import { addAnimItem, playAnimation } from "../sortingAnimations";
 import { swap } from ".";
 
-// [10, 5, 3, 4, 2]
+// [10, 5, 3, 4, 2]notexc
 const selectionSort = (inputArray = [], enableVisualization = true) => {
     let arr = inputArray;
     const n = inputArray.length;

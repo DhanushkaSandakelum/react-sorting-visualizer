@@ -7,7 +7,7 @@ import classNames from "classnames";
 
 // Utils
 import { getArrayWithRandomNumbers } from "../../utils/arrays";
-import { bubbleSort, selectionSort, testSortingAlgorithm } from "../../utils/sorting-algorithms";
+import { bubbleSort, selectionSort, insertionSort, testSortingAlgorithm } from "../../utils/sorting-algorithms";
 
 // Components
 import Button from "../base/button/Button";
@@ -62,7 +62,8 @@ function SortingVisualizer({ visualizerWidth = "1000", visualizerHeight = "600" 
         <Button text="Generate Random Array" onClick={resetArray} />
         <Button text="Bubble Sort" onClick={() => bubbleSort(array)} />
         <Button text="Selection Sort" onClick={() => selectionSort(array)} />
-        <Button text="Test Sorting Alogirithms" onClick={() => testSortingAlgorithm("selection-sort")} />
+        <Button text="Insertion Sort" onClick={() => insertionSort(array)} />
+        <Button text="Test Sorting Alogirithms" onClick={() => testSortingAlgorithm("insertion-sort")} />
       </div>
     </div>
   );
