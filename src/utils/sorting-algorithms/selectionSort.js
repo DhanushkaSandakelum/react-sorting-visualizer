@@ -24,10 +24,7 @@ const selectionSort = (inputArray = [], enableVisualization = true) => {
             }
         }
 
-        // swap(arr, minIdx, i)
-        const temp = arr[minIdx];
-        arr[minIdx] = arr[i];
-        arr[i] = temp;
+        swap(arr, minIdx, i)
         // For Animating bar visualizations
         addAnimItem(animList, i, arr[i], minIdx, arr[minIdx], "swap", enableVisualization)
     }

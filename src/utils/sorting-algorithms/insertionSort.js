@@ -1,5 +1,4 @@
 import { addAnimItem, playAnimation } from "../sortingAnimations";
-import { swap } from ".";
 
 const insertionSort = (inputArray = [], enableVisualization = true) => {
     let arr = inputArray;
@@ -21,17 +20,17 @@ const insertionSort = (inputArray = [], enableVisualization = true) => {
             addAnimItem(animList, j, arr[j], i, arr[i], "found", enableVisualization)
 
             // For Animating bar visualizations
-        addAnimItem(animList, j+1, arr[j+1], j, arr[j], "swap", enableVisualization)
-    
+            addAnimItem(animList, j + 1, arr[j + 1], j, arr[j], "insert", enableVisualization)
+
             arr[j + 1] = arr[j]
             j = j - 1
-                       
         }
 
-        arr[j + 1] = key
 
         // For Animating bar visualizations
-        addAnimItem(animList, j+1, arr[j+1], i, arr[i], "swap", enableVisualization)
+        addAnimItem(animList, j + 1, arr[j + 1], i, arr[i], "insert", enableVisualization)
+
+        arr[j + 1] = key
     }
 
     // For Animating bar visualizations

@@ -17,10 +17,7 @@ const bubbleSort = (inputArray = [], enableVisualization = true) => {
                 // For Animating bar visualizations
                 addAnimItem(animList, j, arr[j], j + 1, arr[j + 1], "found", enableVisualization)
 
-                // swap(arr, j, j + 1)
-                const temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
+                swap(arr, j, j + 1)
                 // For Animating bar visualizations
                 addAnimItem(animList, j, arr[j], j + 1, arr[j + 1], "swap", enableVisualization)
             }
