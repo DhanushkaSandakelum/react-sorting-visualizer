@@ -33,7 +33,7 @@ function SortingVisualizer({
   const [array, setArray] = useState([]);
 
   const resetArray = () => {
-    // Rest Values
+    // Reset Values
     const array = getArrayWithRandomNumbers(
       REQUIRED_ARRAY_ITEM_AMOUNT,
       5,
@@ -41,14 +41,16 @@ function SortingVisualizer({
     );
 
     setArray(array);
+  };
 
-    // Reset styles
+  useEffect(() => {
+    // Reset Colors
     var arrayBars = document.getElementsByClassName("array-bar");
 
     for (const bar of arrayBars) {
       bar.style.backgroundColor = "#b0bec5";
     }
-  };
+  }, [array]);
 
   useEffect(() => {
     resetArray();
@@ -64,7 +66,6 @@ function SortingVisualizer({
 
   // Run Sorting
   const handleRun = () => {
-    console.log(selectedSortingAlgorithm);
     switch (selectedSortingAlgorithm) {
       case "bubble-sort":
         bubbleSort(array);
@@ -128,10 +129,10 @@ function SortingVisualizer({
 
         <Button text="Run" onClick={handleRun} />
 
-        {/* <Button
+        <Button
           text="Test Sorting Alogirithms"
-          onClick={() => testSortingAlgorithm("insertion-sort")}
-        /> */}
+          onClick={() => testSortingAlgorithm(selectedSortingAlgorithm)}
+        />
       </div>
     </div>
   );

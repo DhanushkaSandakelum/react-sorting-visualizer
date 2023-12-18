@@ -11,10 +11,12 @@ const swap = (arr, xIdx, yIdx) => {
   arr[xIdx] = temp;
 }
 
-const testSortingAlgorithm = (sortingAlgorithm = "bubble-sort") => {
-  let res = { success: true, testArray: [], sortedArray: [] };
+const testSortingAlgorithm = (sortingAlgorithm = "bubble-sort", testAmount = 10) => {
+  console.log(`sorting algorithm: ${sortingAlgorithm}`);
 
-  for (let i = 0; i < 10; i++) {
+  let testResults = []
+
+  for (let i = 0; i < testAmount; i++) {
     const length = getRandomInt(5, 100);
 
     const arr = getArrayWithRandomNumbers(length, 5, 1000);
@@ -43,16 +45,38 @@ const testSortingAlgorithm = (sortingAlgorithm = "bubble-sort") => {
     }
 
 
-    if (!areArrayEqual(jsSortedArray, sortedArray)) {
-      res = { success: false, testArray: arr, sortedArray: sortedArray };
-      return false;
+    if (areArrayEqual(jsSortedArray, sortedArray)) {
+      testResults.push({ arrayLength: length, testArray: arr, sortedArray: sortedArray, status: "passed" })
+    }
+    else {
+      testResults.push({ arrayLength: length, testArray: arr, sortedArray: sortedArray, status: "failed" })
     }
   }
 
-  if (res.success) {
+  // Evaluate test results
+  let passList = [];
+  let failList = [];
+
+  for (let i = 0; i < testResults.length; i++) {
+    if (testResults[i].status === "passed")
+      passList.push(i)
+
+    if (testResults[i].status === "failed")
+      failList.push(i)
+  }
+
+  if (failList.length === 0) {
     console.log("sorting algorithm works!");
+    console.log(`${passList.length} tests passed`);
   } else {
-    console.log("issue found", res);
+    console.log("sorting algorithm fails!");
+    console.log(`${passList.length} tests passed | ${failList.length} tests failed`);
+
+    for (let i = 0; i < failList.length; i++) {
+      const testRes = testResults[i];
+      
+      console.log(testRes);
+    }
   }
 };
 
