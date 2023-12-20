@@ -1,42 +1,52 @@
 import { addAnimItem, playAnimation } from "../sortingAnimations";
 
-const insertionSort = (inputArray = [], enableVisualization = true) => {
-    let arr = inputArray;
-    const n = inputArray.length;
-    var i, j, key
+// For Animations
+let animList = [];
+let enableVisualization = true;
 
-    // For Animating bar visualizations
-    let animList = [];
+const performInsertionSort = (inputArray = []) => {
+  let arr = inputArray;
+  const n = inputArray.length;
+  var i, j, key;
 
-    for (let i = 1; i < n; i++) {
-        key = arr[i]
-        j = i - 1
+  for (let i = 1; i < n; i++) {
+    key = arr[i];
+    j = i - 1;
 
-        // For Animating bar visualizations
-        addAnimItem(animList, j, arr[j], i, arr[i], "compare", enableVisualization)
+    // For Animations
+    addAnimItem(animList, j, arr[j], i, arr[i], "compare", enableVisualization);
 
-        while (j >= 0 && arr[j] > key) {
-            // For Animating bar visualizations
-            addAnimItem(animList, j, arr[j], i, arr[i], "found", enableVisualization)
+    while (j >= 0 && arr[j] > key) {
+      // For Animations
+      addAnimItem(animList, j, arr[j], i, arr[i], "found", enableVisualization);
 
-            // For Animating bar visualizations
-            addAnimItem(animList, j + 1, arr[j + 1], j, arr[j], "insert", enableVisualization)
+      // For Animations
+      addAnimItem(animList, j + 1, arr[j + 1], j, arr[j], "insert", enableVisualization);
 
-            arr[j + 1] = arr[j]
-            j = j - 1
-        }
-
-
-        // For Animating bar visualizations
-        addAnimItem(animList, j + 1, arr[j + 1], i, arr[i], "insert", enableVisualization)
-
-        arr[j + 1] = key
+      arr[j + 1] = arr[j];
+      j = j - 1;
     }
 
-    // For Animating bar visualizations
-    playAnimation(animList, enableVisualization)
+    // For Animations
+    addAnimItem(animList, j + 1, arr[j + 1], i, arr[i], "insert", enableVisualization);
 
-    return arr;
+    arr[j + 1] = key;
+  }
+
+  return arr;
 };
 
-export { insertionSort }
+const insertionSort = (inputArray = [], enableVisualization = true) => {
+  let arr = inputArray;
+
+  animList = [];
+  enableVisualization = enableVisualization;
+
+  arr = performInsertionSort(arr);
+
+  playAnimation(animList, enableVisualization);
+
+  return arr;
+};
+
+export { insertionSort };

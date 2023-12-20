@@ -11,6 +11,7 @@ import {
   bubbleSort,
   selectionSort,
   insertionSort,
+  quickSort,
   testSortingAlgorithm,
 } from "../../utils/sorting-algorithms";
 
@@ -79,6 +80,10 @@ function SortingVisualizer({
         insertionSort(array);
         break;
 
+      case "quick-sort":
+        quickSort(array);
+        break;
+
       default:
         break;
     }
@@ -125,6 +130,7 @@ function SortingVisualizer({
           />
           <SelectOption value="selection-sort" text="Selection Sort" />
           <SelectOption value="insertion-sort" text="Insertion Sort" />
+          <SelectOption value="quick-sort" text="Quick Sort" />
         </Select>
 
         <Button text="Run" onClick={handleRun} />

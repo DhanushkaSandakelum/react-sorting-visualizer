@@ -1,33 +1,44 @@
 import { addAnimItem, playAnimation } from "../sortingAnimations";
 import { swap } from ".";
 
-const bubbleSort = (inputArray = [], enableVisualization = true) => {
-    let arr = inputArray;
-    const n = inputArray.length;
+// For Animations
+let animList = [];
+let enableVisualization = true;
 
-    // For Animating bar visualizations
-    let animList = [];
+const performBubbleSort = (inputArray = []) => {
+  let arr = inputArray;
+  const n = inputArray.length;
 
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n - i - 1; j++) {
-            // For Animating bar visualizations
-            addAnimItem(animList, j, arr[j], j + 1, arr[j + 1], "compare", enableVisualization)
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j < n - i - 1; j++) {
+      // For Animations
+      addAnimItem(animList, j, arr[j], j + 1, arr[j + 1], "compare", enableVisualization);
 
-            if (arr[j] > arr[j + 1]) {
-                // For Animating bar visualizations
-                addAnimItem(animList, j, arr[j], j + 1, arr[j + 1], "found", enableVisualization)
+      if (arr[j] > arr[j + 1]) {
+        // For Animations
+        addAnimItem(animList, j, arr[j], j + 1, arr[j + 1], "found", enableVisualization);
 
-                swap(arr, j, j + 1)
-                // For Animating bar visualizations
-                addAnimItem(animList, j, arr[j], j + 1, arr[j + 1], "swap", enableVisualization)
-            }
-        }
+        swap(arr, j, j + 1);
+        // For Animations
+        addAnimItem(animList, j, arr[j], j + 1, arr[j + 1], "swap", enableVisualization);
+      }
     }
+  }
 
-    // For Animating bar visualizations
-    playAnimation(animList, enableVisualization)
-
-    return arr;
+  return arr;
 };
 
-export { bubbleSort }
+const bubbleSort = (inputArray = [], enableVisualization = true) => {
+  let arr = inputArray;
+
+  animList = [];
+  enableVisualization = enableVisualization;
+
+  arr = performBubbleSort(arr);
+
+  playAnimation(animList, enableVisualization);
+
+  return arr;
+};
+
+export { bubbleSort };
