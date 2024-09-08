@@ -14,5 +14,5 @@ export const CONFIG = {
     BAR_COLOR_VERIFY: "#16a34a",
 
     // Animation Configurations
-    ANIMATION_SPEED: 5,
+    ANIMATION_SPEED: 1,
 };

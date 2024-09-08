@@ -1,14 +1,11 @@
-import {
-  getRandomInt,
-  getArrayWithRandomNumbers,
-  areArrayEqual,
-} from "../arrays";
+import { getRandomInt, getArrayWithRandomNumbers, areArrayEqual } from "../arrays";
 
 // Sorting Algorithms
 import { bubbleSort } from "./bubbleSort";
 import { selectionSort } from "./selectionSort";
 import { insertionSort } from "./insertionSort";
 import { quickSort } from "./quickSort";
+import { mergeSort } from "./mergeSort";
 
 const swap = (arr, xIdx, yIdx) => {
   const temp = arr[yIdx];
@@ -16,10 +13,7 @@ const swap = (arr, xIdx, yIdx) => {
   arr[xIdx] = temp;
 };
 
-const testSortingAlgorithm = (
-  sortingAlgorithm = "bubble-sort",
-  testAmount = 10
-) => {
+const testSortingAlgorithm = (sortingAlgorithm = "bubble-sort", testAmount = 10) => {
   console.log(`sorting algorithm: ${sortingAlgorithm}`);
 
   let testResults = [];
@@ -49,6 +43,10 @@ const testSortingAlgorithm = (
 
       case "quick-sort":
         sortedArray = quickSort(arr.slice(), false);
+        break;
+
+      case "merge-sort":
+        sortedArray = mergeSort(arr.slice(), false);
         break;
 
       default:
@@ -87,9 +85,7 @@ const testSortingAlgorithm = (
     console.log(`${passList.length} tests passed`);
   } else {
     console.log("sorting algorithm fails!");
-    console.log(
-      `${passList.length} tests passed | ${failList.length} tests failed`
-    );
+    console.log(`${passList.length} tests passed | ${failList.length} tests failed`);
 
     for (let i = 0; i < failList.length; i++) {
       const testRes = testResults[i];
@@ -109,4 +105,5 @@ export {
   selectionSort,
   insertionSort,
   quickSort,
+  mergeSort
 };

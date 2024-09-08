@@ -7,13 +7,7 @@ import classNames from "classnames";
 
 // Utils
 import { getArrayWithRandomNumbers } from "../../utils/arrays";
-import {
-  bubbleSort,
-  selectionSort,
-  insertionSort,
-  quickSort,
-  testSortingAlgorithm,
-} from "../../utils/sorting-algorithms";
+import { bubbleSort, selectionSort, insertionSort, quickSort, mergeSort, testSortingAlgorithm } from "../../utils/sorting-algorithms";
 
 // Components
 import Button from "../base/button/Button";
@@ -25,21 +19,14 @@ import SelectOption from "../base/select/SelectOption";
 // Data / Images / Icons
 import { CONFIG } from "../../data/config";
 
-function SortingVisualizer({
-  visualizerWidth = CONFIG.VISUALIZER_WIDTH,
-  visualizerHeight = CONFIG.VISUALIZER_HEIGHT,
-}) {
+function SortingVisualizer({ visualizerWidth = CONFIG.VISUALIZER_WIDTH, visualizerHeight = CONFIG.VISUALIZER_HEIGHT }) {
   const { REQUIRED_ARRAY_ITEM_AMOUNT } = CONFIG;
 
   const [array, setArray] = useState([]);
 
   const resetArray = () => {
     // Reset Values
-    const array = getArrayWithRandomNumbers(
-      REQUIRED_ARRAY_ITEM_AMOUNT,
-      5,
-      visualizerHeight
-    );
+    const array = getArrayWithRandomNumbers(REQUIRED_ARRAY_ITEM_AMOUNT, 5, visualizerHeight);
 
     setArray(array);
   };
@@ -58,8 +45,7 @@ function SortingVisualizer({
   }, []);
 
   // Sorting algorithm selection
-  const [selectedSortingAlgorithm, setSelectedSortingAlgorithm] =
-    useState("bubble-sort");
+  const [selectedSortingAlgorithm, setSelectedSortingAlgorithm] = useState("bubble-sort");
 
   const handleSelectSortingAlgorithm = (e) => {
     setSelectedSortingAlgorithm(e.target.value);
@@ -82,6 +68,10 @@ function SortingVisualizer({
 
       case "quick-sort":
         quickSort(array);
+        break;
+
+      case "merge-sort":
+        mergeSort(array);
         break;
 
       default:
@@ -118,27 +108,17 @@ function SortingVisualizer({
       <div className="flex flex-row gap-2 p-2 border border-gray-300 bg-gray-200/50 rounded-md w-full">
         <Button text="Generate Random Array" onClick={resetArray} />
 
-        <Select
-          id="sortingAlgorithms"
-          name="sortingAlgorithms"
-          onChange={handleSelectSortingAlgorithm}
-        >
-          <SelectOption
-            value="bubble-sort"
-            text="Bubble Sort"
-            defaultChecked={true}
-          />
+        <Select id="sortingAlgorithms" name="sortingAlgorithms" onChange={handleSelectSortingAlgorithm}>
+          <SelectOption value="bubble-sort" text="Bubble Sort" defaultChecked={true} />
           <SelectOption value="selection-sort" text="Selection Sort" />
           <SelectOption value="insertion-sort" text="Insertion Sort" />
           <SelectOption value="quick-sort" text="Quick Sort" />
+          <SelectOption value="merge-sort" text="Merge Sort" />
         </Select>
 
         <Button text="Run" onClick={handleRun} />
 
-        <Button
-          text="Test Sorting Alogirithms"
-          onClick={() => testSortingAlgorithm(selectedSortingAlgorithm)}
-        />
+        <Button text="Test Sorting Alogirithms" onClick={() => testSortingAlgorithm(selectedSortingAlgorithm)} />
       </div>
     </div>
   );
